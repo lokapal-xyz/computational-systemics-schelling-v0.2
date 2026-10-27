@@ -1,0 +1,4 @@
+# Mesa 3.5.1 imports discrete_space.network on startup, which needs networkx.
+# The viz extra supplies Solara, Matplotlib, and Altair for `solara run app.py`.
+mesa[viz]==3.5.1
+networkx>=3.2
