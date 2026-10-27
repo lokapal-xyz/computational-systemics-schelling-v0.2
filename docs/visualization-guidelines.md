@@ -9,14 +9,18 @@ guidelines are the cross-version rules. A version spec states only what that
 version adds. When the two disagree about a shared rule, these guidelines win
 and the version spec should be updated to match.
 
-Reference captures from the running v0.1 dashboard:
+Reference captures from the running v0.2 dashboard in this folder:
 
-![v0.1 dashboard at step 0](./solara-v0.1-start.png)
+![v0.2 dashboard at step 0](./solara-start.png)
 
-![v0.1 dashboard after it stops](./solara-v0.1-end.png)
+![v0.2 dashboard while it plays](./solara-play.png)
 
-The originals live in `schelling-v0.1/docs/` as `solara-start.png` and
-`solara-end.png`.
+![v0.2 dashboard after it stops](./solara-end.png)
+
+The one-criterion page is the v0.1 dashboard. Its captures live in
+`schelling-v0.1/docs/` as `solara-start.png` and `solara-end.png`. v0.2
+keeps that page and adds the mark channel: marker shape, the second
+permeability, the breach lines, and the second chart series.
 
 ## What stays
 

@@ -2,8 +2,8 @@
 
 **Purpose:** Coding reference for the two-criterion Schelling model.  
 **Companions:** `computational-systemics-summary.md` (why these models exist) and `conciliatorics.md` (the treatise). Open the treatise only when an operator needs its original definition.  
-**Source tree:** `../../schelling-v0.1/`. Copy it. Do not modify it and do not import it.  
-**Status:** Specified. The model in this folder is not implemented yet.
+**Sibling:** `../schelling-v0.1/` from this folder (`../../schelling-v0.1/` from `docs/`). Compare against it for the type-only regression. Do not modify it and do not import it.  
+**Status:** Implemented. The model, the CLI, and the dashboard in this folder follow this spec. Change them in place.
 
 ## 1. Goal of v0.2
 
@@ -26,7 +26,7 @@ The package name stays `schelling_status`. The step method stays a shuffle of `a
 
 ## 3. Behavior carried over from v0.1
 
-Keep these rules. They are already implemented in the v0.1 tree.
+Keep these rules. They are implemented in this folder and in the v0.1 tree.
 
 - Non-toroidal Moore neighborhood (8 cells, fewer on the border).
 - One agent per cell. Empty cells are left out of the similarity ratio.
@@ -236,11 +236,11 @@ Use this folder's `.venv` for v0.2 and v0.1's `.venv` for v0.1. Do not point the
 
 This control does not reproduce the v0.1 series. Mark assignment consumes extra random draws. Use section 10 for the bit-level check. Use this section to confirm that an inactive criterion contributes no breaches while the active criterion still clusters.
 
-At permeability 0.4 on `type`, the type index should rise from its initial value and the run should reach a state with no dissatisfied agents, or hit the step cap while still climbing. Record the series. Do not tune the model to hit a chosen final number.
+At permeability 0.4 on `type`, the type index should rise from its initial value and the run should reach a state with no dissatisfied agents, or hit the step cap while still climbing. The seed-1 series for this control, the default run, and the permeability comparisons are in `README.md` under Checked runs. When a change moves those numbers, record the new series there. Do not tune the model to hit a chosen final number.
 
 ## 12. Dashboard
 
-Follow `visualization-guidelines.md` for the page, the palette, the channels, and the Solara constraints. The captures there are the v0.1 dashboard. v0.2 keeps that page. This section is only what v0.2 adds.
+Follow `visualization-guidelines.md` for the page, the palette, the channels, and the Solara constraints. The captures in this folder (`solara-start.png`, `solara-play.png`, `solara-end.png`) are the running v0.2 dashboard. v0.2 keeps the v0.1 page. This section is only what v0.2 adds.
 
 Footer line: `v0.2 prototype`.
 
@@ -293,26 +293,28 @@ Keep the legend, with those two names. Title: **Segregation by criterion**. Y-ax
 
 The v0.1 chart styling deletes the legend because it has one series. The v0.2 styling keeps it.
 
-## 13. Repository setup
+## 13. Repository
 
-Copy from `schelling-v0.1` into this folder:
+The model, the CLI, and the dashboard are in this folder. Change these files. Do not copy `schelling-v0.1` over them.
 
-- `schelling_status/` (the package, not its `__pycache__`)
-- `run.py`
-- `app.py`
-- `requirements.txt`
-- `setup.sh`
-- `.gitignore`
+- `schelling_status/` — `status.py`, `agent.py`, `model.py`. Leave `__pycache__` out of commits.
+- `run.py` — CLI step log. The step cap is enforced here.
+- `app.py` — Solara dashboard.
+- `requirements.txt` — `mesa[viz]==3.5.1` and NetworkX.
+- `setup.sh` — create `.venv` when it is missing, install when packages are missing or outdated, run `solara run app.py`.
+- `.gitignore` — ignores `.venv/` and `temp/`.
+- `README.md` — quick start, layout, the Operational Status table, CLI and dashboard defaults, checked runs, and the v0.2 scope. Update it when those change. The framework documents it points at are the copies in this folder.
+- `docs/schelling-operational-status-spec.md` — this contract.
+- `docs/computational-systemics-summary.md`, `docs/conciliatorics.md`, `docs/visualization-guidelines.md` — framework copies.
+- `docs/solara-start.png`, `docs/solara-play.png`, `docs/solara-end.png` — the running dashboard.
 
-Leave behind: `.venv`, `__pycache__`, `.git`, `docs/`, `temp/`, `AGENTS.md`, `README.md`. This folder already has its own `AGENTS.md`, `README.md`, and spec.
-
-Create a new `.venv` here. Install from this folder's `requirements.txt`.
-
-After the model runs, rewrite `README.md` in the style of v0.1: quick start, layout, the Operational Status table, CLI and dashboard defaults, and the v0.2 scope. Point the framework documents at the copies in this folder: `computational-systemics-summary.md`, `conciliatorics.md`, and `visualization-guidelines.md`.
+Use this folder's `.venv`. Do not point v0.2 and v0.1 at one environment.
 
 Do not initialize a remote unless the user asks.
 
 ## 14. Success criteria
+
+These checks pass on the current tree. The recorded series are in `README.md` under Checked runs. Re-run the checks a change can affect.
 
 - The type-only CLI matches v0.1's printed series for seed 1 at permeability 0.3, 0.4, and 0.7 (section 10).
 - The default two-criterion CLI finishes, prints both indexes and the breach columns, and stops when nobody is dissatisfied or at the step cap.
@@ -323,15 +325,15 @@ Do not initialize a remote unless the user asks.
 - The dashboard shows cyan and amber, circles and squares, a white edge on dissatisfied agents, both indexes, both breach lines, and two chart series. Sliders rebuild the model. Play advances the grid.
 - Keyword-only construction. Conflicting size or density aliases raise. A stray `permeability` argument raises.
 
-## 15. Implementation order
+## 15. When changing the model
 
-1. Read this spec, `visualization-guidelines.md`, and the v0.1 modules this spec names: `status.py`, `agent.py`, `model.py`, `run.py`, `app.py`.
-2. Copy the tree (section 13) and create `.venv`.
-3. Place two entries. Keep the type-only path on the same random stream as v0.1.
-4. Replace the pooled segregation index with the two reporters and the breach counts.
-5. Extend `run.py`. Confirm section 10, then section 11.
-6. Extend the dashboard encoding, the stats widget, and the chart, on the shared page from the visualization guidelines. Confirm them in the browser.
-7. Rewrite `README.md` from the run that just happened.
+The build is finished. The two entries, the per-criterion reporters, the CLI, and the dashboard are in place. For a later change:
+
+1. Read this spec and `visualization-guidelines.md`.
+2. Edit the files in this folder. Leave `../schelling-v0.1/` untouched.
+3. Confirm section 10 when placement, the shuffle, or the type-only path changes, then section 11 when breach counts or movement change.
+4. Confirm the dashboard in the browser when the encoding, the stats widget, or the chart changes.
+5. Update `README.md` when defaults, columns, or checked-run numbers change.
 
 ## 16. Deferred
 

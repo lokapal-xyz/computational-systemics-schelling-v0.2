@@ -4,6 +4,8 @@
 **Date:** October 2026  
 **Context:** Derived from discussions on applying the Conciliatorics treatise via agent-based modeling.
 
+**In this folder:** The notes below are the program those versions come from. The code here is v0.2, and it is implemented: two fixed binary criteria, `type` and `mark`, each with its own Permeability. The one-criterion model is v0.1 in `../schelling-v0.1/`. Dynamic Fronterization, relevance weights, and graded Sub/Supra or Hypo/Hyper status remain later work.
+
 ## 1. Why This Implementation
 
 Conciliatorics is a perspective inside Systemics that aims to reconcile the ways we approach systems (via Inventive Parcels: Contemplation/Transformation × Intrinsicality/Interstitiality). The core developed so far is Edified Interstitial Contemplation (EIC, associated with Philosophy) and the start of Edified Intrinsic Transformation (EIT, associated with Technology).

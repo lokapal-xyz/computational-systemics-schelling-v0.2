@@ -7,7 +7,7 @@ Instructions for AI coding agents working in `schelling-v0.2/`.
 This folder is the v0.2 Schelling model for Computational Systemics: two
 fixed binary criteria, each with its own Permeability. The behavior is
 defined in `docs/schelling-operational-status-spec.md`. That spec is the
-primary coding reference. Implement it. Do not widen it.
+primary coding reference. Follow it. Do not widen it.
 
 Computational Systemics is generative agent-based modeling grounded in
 Conciliatorics. The operators in this model are Fronterization, Permeability,
@@ -15,18 +15,15 @@ Receptivity, and Proceptivity. The framework documents are in `docs/`:
 
 - `docs/computational-systemics-summary.md` — why these models exist.
 - `docs/conciliatorics.md` — the treatise. Open it when an operator needs its original definition.
-- `docs/visualization-guidelines.md` — shared dashboard look. v0.1 is the reference. This version's spec adds the mark channel and the second chart series.
+- `docs/visualization-guidelines.md` — shared dashboard look. v0.1 is the reference page. This version adds the mark channel and the second chart series.
 
-`../schelling-v0.1/` is the implemented one-criterion model and the tree to
-copy. Do not modify it. Do not import it. Copy the files the spec names and
-change the copies in this folder.
+`../schelling-v0.1/` is the implemented one-criterion model. Do not modify it. Do not import it. Do not copy it over this tree. The type-only path in `run.py` is the regression against it.
+
+`README.md` is the map of the current tree, the run commands, the defaults, and the checked runs.
 
 ## Current tree
 
-The spec and these instructions are in place. The model, the CLI, and the
-dashboard are not. Build them here, under the package name `schelling_status`.
-
-When the tree exists, keep this shape:
+The model, the CLI, and the dashboard are implemented. Extend these files. Do not add a second model package or a new entry point unless the user asks.
 
 - `schelling_status/` — `status.py` (`StatusEntry`), `agent.py` (`SchellingAgent`), `model.py` (`SchellingModel`).
 - `run.py` — CLI step log. The step cap is enforced here, not inside `SchellingModel.step()`.
@@ -37,6 +34,7 @@ When the tree exists, keep this shape:
 - `docs/computational-systemics-summary.md` — why these models exist.
 - `docs/conciliatorics.md` — the treatise.
 - `docs/visualization-guidelines.md` — shared dashboard look.
+- `docs/solara-start.png`, `docs/solara-play.png`, `docs/solara-end.png` — the running dashboard.
 
 ## Rules that carry over
 
@@ -66,9 +64,9 @@ source .venv/bin/activate
 ## Workflow
 
 1. Read `docs/schelling-operational-status-spec.md` and `docs/visualization-guidelines.md` before changing the model or the dashboard.
-2. Copy the v0.1 tree as the spec's setup section describes. Change the copies.
-3. Verify the model with `python run.py`, including the type-only regression against v0.1.
-4. Verify the dashboard with `solara run app.py`. Confirm the grid, both marker shapes, the stats, and both chart series.
+2. Change the current tree. The two-criterion model, the CLI, and the dashboard are already there.
+3. Verify model changes with `python run.py`, including the type-only regression against v0.1 when placement or the step loop changes.
+4. Verify dashboard changes with `solara run app.py`. Confirm the grid, both marker shapes, the stats, and both chart series.
 5. Ask before adding anything the spec lists as deferred.
 
 ## Out of scope unless the user asks
